@@ -1,9 +1,11 @@
 import Button from "./Button"
+import * as MyRouter from "../lib/MyRouter"
 
 const ProductItem = ({product, onClick}) => {
 
   const {name, price, thumbnail} = product
 
+  
   return (
     <div className="ProductItem">
       <div className="description">
@@ -11,7 +13,11 @@ const ProductItem = ({product, onClick}) => {
         <div>{price.toLocaleString()}</div>
 
         {onClick && (
-             <Button styleType={"brand"}>주문하기</Button>
+             
+
+        <Button styleType={"brand"} onClick ={onClick} >주문하기</Button>
+   
+ 
         )}
   
       </div>

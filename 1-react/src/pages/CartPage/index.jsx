@@ -1,3 +1,5 @@
+import * as MyRouter from "../../lib/MyRouter"
+
 import Page from "../../components/Page"
 import Title from "../../components/Title"
 import PaymentButton from "./PaymentButton"
@@ -16,12 +18,21 @@ import ProductApi from 'shared/api/ProductApi'
    }
 
    async fetch(){
-     try {
-        const product = await ProductApi.fetchProduct("CACDA422")
+
+     const {productId} = this.props.params();
+    if(!productId) return;
+
+     try {       
+        const product = await ProductApi.fetchProduct(productId)
         this.setState({product})
      } catch(e){
        console.error(e)
      }
+   }
+
+   handleSubmit(values){
+     console.log(values)
+     this.props.navigate("/order")
    }
 
    componentDidMount(){
@@ -43,8 +54,7 @@ import ProductApi from 'shared/api/ProductApi'
             <ProductItem product={product} />
             )}
 
-        
-           <OrderForm/>
+            <OrderForm onSubmit={this.handleSubmit}/>
             </Page>
 
           
@@ -56,4 +66,4 @@ import ProductApi from 'shared/api/ProductApi'
 
 
 
-export default CartPage
+export default MyRouter.withRouter(CartPage);

@@ -1,11 +1,14 @@
 import ProductItem from "../../components/ProductItem"
+import * as MyRouter from "../../lib/MyRouter"
 
-const OrderableProductItem = ({product}) => {
-  const handleClick = () => {
-    console.log("주문하기 클릭")
-  }
+const OrderableProductItem = ({product, navigate}) => {
+      const handleClick = () => {
+        console.log(product.id)
+        navigate(`/cart?id=${product.id}`)
+      }
 
-  return <ProductItem product={product} onClick = {handleClick} />
+      return <ProductItem product={product} onClick = {handleClick} />
+
 }
 
-export default OrderableProductItem
+export default MyRouter.withRouter(OrderableProductItem)
